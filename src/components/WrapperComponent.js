@@ -1,24 +1,17 @@
 import React, { Component } from 'react'
 
 class WrapperComponent extends Component {
-    
-    toggleContent = () => {
-        this.setState = { showContent: false };
-        console.log('clicked')
-    }
+    state = { showContent: true };
 
-    constructor(props) {
-        super(props);
-        this.state = { showContent: true };
-        console.log(this.state)
-        console.log(this.props)
+    toggleContent = () => {
+        this.setState({ showContent: !this.state.showContent });
     }
 
     render() {
         return (
             <div className="wrapper">
-                {this.props.children}
-                <hr></hr>
+                {this.state.showContent ? <div>{this.props.children}</div> : null}
+                <hr />
                 <button onClick={this.toggleContent}>Show content</button>
             </div>
         )
