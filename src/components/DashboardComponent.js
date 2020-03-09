@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import WrapperComponent from './WrapperComponent';
+import UserComponent from './UserComponent';
 
 class DashboardComponent extends Component {
     state = { users: ['Anders Söderberg', 'Anna Söderberg', 'Alice Söderberg', 'Leonora Söderberg'] };
@@ -9,18 +10,14 @@ class DashboardComponent extends Component {
     handleChange = this.handleChange.bind(this);
     AddUsers = this.AddUsers.bind(this);
 
-    renderUsers = () => {
-        this.users.forEach(element => {
-            return [<div> {this.element}</div>]
-        });
-    }
-
     handleChange(event) {
         this.setState({ value: event.target.value });
     }
 
     AddUsers(event) {
-        console.log(this.state.value)
+        console.log('Add clicked')
+        const newUsers = this.state.value;
+        this.setState({ value: newUsers })
         event.preventDefault();
     }
 
@@ -38,6 +35,10 @@ class DashboardComponent extends Component {
         return (
             <React.Fragment>
                 <WrapperComponent>
+                    <div>
+                        {this.state.value}
+                        <UserComponent />
+                    </div>
                     <div>
                         <li style={{ color: this.state.color }}> {this.state.users} </li>
                     </div>
