@@ -1,7 +1,11 @@
 import React, { Component } from 'react'
 
 class WrapperComponent extends Component {
-    state = { showContent: true };
+
+    constructor(props) {
+        super(props)
+        this.state = { showContent: true };
+    }
 
     toggleContent = () => {
         this.setState({ showContent: !this.state.showContent });

@@ -3,29 +3,30 @@ import WrapperComponent from './WrapperComponent';
 import UserComponent from './UserComponent';
 
 class DashboardComponent extends Component {
-    state = { users: ['Anders Söderberg', 'Anna Söderberg', 'Alice Söderberg', 'Leonora Söderberg'], color: 'blue', value: '' }
 
-    handleChange = this.handleChange.bind(this);
-    AddUsers = this.AddUsers.bind(this);
-    RemoveUsers = this.RemoveUsers.bind(this);
+    constructor() {
+        super()
+        this.state = { users: ['Anders Söderberg', 'Anna Söderberg', 'Alice Söderberg', 'Leonora Söderberg'], color: 'blue', value: '' }
+        this.handleChange = this.handleChange.bind(this);
+        this.AddUsers = this.AddUsers.bind(this);
+        this.RemoveUsers = this.RemoveUsers.bind(this);
+    }
 
     handleChange(event) {
         this.setState({ value: event.target.value });
     }
 
     AddUsers(event) {
-        const newUsers = this.state.value;
-        console.log(newUsers)
-        this.setState({ value: newUsers })
-        this.state.users.push(newUsers)
+        const newUsersInput = this.state.value;
+        this.setState({ value: newUsersInput })
+        this.state.users.push(newUsersInput)
         event.preventDefault();
-        // this.state.users = ""
+        this.setState({ value: ""})
     }
 
     RemoveUsers(event) {
-        console.log('Remove clicked')
-        const newUsers = this.state.value;
-        this.setState({ value: newUsers })
+        const newUsersInput = this.state.value;
+        this.setState({ value: newUsersInput })
         this.state.users.pop()
         event.preventDefault();
     }
