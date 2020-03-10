@@ -3,30 +3,34 @@ import WrapperComponent from './WrapperComponent';
 import UserComponent from './UserComponent';
 
 class DashboardComponent extends Component {
-    state = { users: ['Anders Söderberg', 'Anna Söderberg', 'Alice Söderberg', 'Leonora Söderberg'] };
-    state = { color: 'blue' };
-    state = { value: '' };
+    state = { users: ['Anders Söderberg', 'Anna Söderberg', 'Alice Söderberg', 'Leonora Söderberg'], color: 'blue', value: '' }
 
     handleChange = this.handleChange.bind(this);
     AddUsers = this.AddUsers.bind(this);
+    RemoveUsers = this.RemoveUsers.bind(this);
 
     handleChange(event) {
         this.setState({ value: event.target.value });
     }
 
     AddUsers(event) {
-        console.log('Add clicked')
+        const newUsers = this.state.value;
+        console.log(newUsers)
+        this.setState({ value: newUsers })
+        this.state.users.push(newUsers)
+        event.preventDefault();
+        // this.state.users = ""
+    }
+
+    RemoveUsers(event) {
+        console.log('Remove clicked')
         const newUsers = this.state.value;
         this.setState({ value: newUsers })
+        this.state.users.pop()
         event.preventDefault();
     }
 
-    RemoveUsers() {
-
-    }
-
     toggleColor = () => {
-        console.log(this.state.color)
         const newColor = this.state.color === 'blue' ? 'red' : 'blue'
         this.setState({ color: newColor });
     }
@@ -36,11 +40,7 @@ class DashboardComponent extends Component {
             <React.Fragment>
                 <WrapperComponent>
                     <div>
-                        {this.state.value}
-                        <UserComponent />
-                    </div>
-                    <div>
-                        <li style={{ color: this.state.color }}> {this.state.users} </li>
+                        <UserComponent users={this.state.users} color={this.state.color} />
                     </div>
                     <div>
                         <button onClick={this.toggleColor}>Toggle colors</button>
@@ -52,7 +52,7 @@ class DashboardComponent extends Component {
                             <input type="text" name="users" placeholder="new user.." value={this.state.value} onChange={this.handleChange}>
                             </input>
                             <button className="green" type="submit" value="Submit">Add</button>
-                            <button className="red">Remove</button>
+                            <button className="red" onClick={this.RemoveUsers} >Remove</button>
                         </form>
                     </div>
                 </WrapperComponent>
