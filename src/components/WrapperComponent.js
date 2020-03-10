@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import button from './wrapper.model.css' 
 
 class WrapperComponent extends Component {
 
@@ -16,7 +17,7 @@ class WrapperComponent extends Component {
             <div className="wrapper">
                 {this.state.showContent ? <div>{this.props.children}</div> : null}
                 <hr />
-                <button onClick={this.toggleContent}>Show content</button>
+                <button className={button} onClick={this.toggleContent}>Show content</button>
             </div>
         )
     }
