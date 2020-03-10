@@ -14,20 +14,19 @@ class DashboardComponent extends Component {
 
     handleChange(event) {
         this.setState({ value: event.target.value });
+
     }
 
     AddUsers(event) {
-        const newUsersInput = this.state.value;
-        this.setState({ value: newUsersInput })
-        this.state.users.push(newUsersInput)
+        const newUser = [...this.state.users, this.state.value];
+        this.setState({ users: newUser });
+        this.setState({ value: "" });
         event.preventDefault();
-        this.setState({ value: ""})
     }
 
     RemoveUsers(event) {
-        const newUsersInput = this.state.value;
-        this.setState({ value: newUsersInput })
-        this.state.users.pop()
+        let removeUser = this.state.users.slice(1)
+        this.setState({ users: removeUser });
         event.preventDefault();
     }
 
@@ -50,7 +49,7 @@ class DashboardComponent extends Component {
                 <WrapperComponent>
                     <div>
                         <form onSubmit={this.AddUsers}>
-                            <input type="text" name="users" placeholder="new user.." value={this.state.value} onChange={this.handleChange}>
+                            <input type="text" name="users" placeholder="new user.." value={this.state.value} onChange={event => this.handleChange(event)}>
                             </input>
                             <button className="green" type="submit" value="Submit">Add</button>
                             <button className="red" onClick={this.RemoveUsers} >Remove</button>
