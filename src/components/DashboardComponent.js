@@ -39,12 +39,16 @@ class DashboardComponent extends Component {
         return (
             <React.Fragment>
                 <WrapperComponent>
-                    <div>
-                        <UserComponent users={this.state.users} color={this.state.color} />
-                    </div>
-                    <div>
-                        <button onClick={this.toggleColor}>Toggle colors</button>
-                    </div>
+                    <ul>
+                        {this.state.users.map((user, index) => {
+                            return (
+                                <UserComponent className="userListItem" color={this.state.color} key={index}>
+                                    {user}
+                                </UserComponent>
+                            );
+                        })}
+                    </ul>
+                    <button onClick={this.toggleColor}>Toggle colors</button>
                 </WrapperComponent>
                 <WrapperComponent>
                     <div>

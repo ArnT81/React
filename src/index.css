@@ -65,6 +65,10 @@ input:focus {
   background: linear-gradient(to bottom,  #ffffff, .5%, #239e3d);
 }
 
+ul {
+  padding: 0px;
+}
+
 li {
 list-style: none;
 }

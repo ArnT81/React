@@ -2,11 +2,9 @@ import React from 'react';
 
 function UserComponent(props) {
     return (
-        <div>
-            {props.users.map((user, index) => (
-                <li className="userListItem" style={{ color: props.color }} key={index}> {user} </li>
-            ))}
-        </div>
+        <li className="userListItem" style={{ color: props.color }}>
+            {props.children}
+        </li>
     );
 }
 
