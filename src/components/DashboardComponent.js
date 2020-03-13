@@ -2,6 +2,14 @@ import React, { Component } from 'react'
 import WrapperComponent from './WrapperComponent';
 import UserComponent from './UserComponent';
 
+/** 
+*   Logic to update the virtual DOM when changes in the inputfield occurs,
+*   adds users, remove users, and toggle color of the users.
+*   Displays the "toggle color-button" in the first wrapper
+*   and the "new user" input-field, the add-button and remove-button in the 
+*   other wrapper.
+*/
+
 class DashboardComponent extends Component {
 
     constructor() {
@@ -14,7 +22,6 @@ class DashboardComponent extends Component {
 
     handleChange(event) {
         this.setState({ value: event.target.value });
-
     }
 
     AddUsers(event) {
