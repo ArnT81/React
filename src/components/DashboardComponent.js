@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 import WrapperComponent from './WrapperComponent';
 import UserComponent from './UserComponent';
 
+
+// useState   !!!!!!!!
+
 /** 
 *   Logic to update the virtual DOM when changes in the inputfield occurs,
 *   adds users, remove users, and toggle color of the users.
@@ -14,27 +17,29 @@ class DashboardComponent extends Component {
 
     constructor() {
         super()
-        this.state = { users: ['Anders Söderberg', 'Anna Söderberg', 'Alice Söderberg', 'Leonora Söderberg'], color: 'blue', value: '' }
+        this.state = {
+            users: ['Anders Söderberg', 'Anna Söderberg', 'Alice Söderberg', 'Leonora Söderberg'],
+            color: 'blue',
+            value: ''}
         this.handleChange = this.handleChange.bind(this);
         this.AddUsers = this.AddUsers.bind(this);
         this.RemoveUsers = this.RemoveUsers.bind(this);
     }
 
-    handleChange(event) {
-        this.setState({ value: event.target.value });
+    handleChange(e) {
+        this.setState({ value: e.target.value });
     }
 
-    AddUsers(event) {
+    AddUsers(e) {
         const newUser = [...this.state.users, this.state.value];
-        this.setState({ users: newUser });
-        this.setState({ value: "" });
-        event.preventDefault();
+        this.setState({ users: newUser, value: ""});
+        e.preventDefault();
     }
 
-    RemoveUsers(event) {
+    RemoveUsers(e) {
         let removeUser = this.state.users.slice(1)
         this.setState({ users: removeUser });
-        event.preventDefault();
+        e.preventDefault();
     }
 
     toggleColor = () => {
@@ -49,21 +54,37 @@ class DashboardComponent extends Component {
                     <ul>
                         {this.state.users.map((user, index) => {
                             return (
-                                <UserComponent className="userListItem" color={this.state.color} key={index}>
-                                    {user}
-                                </UserComponent>
+                                <UserComponent
+                                    className="userListItem"
+                                    user={user}
+                                    color={this.state.color}
+                                    key={index} />
                             );
                         })}
                     </ul>
-                    <button onClick={this.toggleColor}>Toggle colors</button>
+                    <button
+                        onClick={this.toggleColor}>Toggle colors
+                    </button>
                 </WrapperComponent>
                 <WrapperComponent>
                     <div>
                         <form onSubmit={this.AddUsers}>
-                            <input type="text" name="users" placeholder="new user.." value={this.state.value} onChange={event => this.handleChange(event)}>
+                            <input
+                                type="text"
+                                name="users"
+                                placeholder="new user.."
+                                value={this.state.value}
+                                onChange={e => this.handleChange(e)}>
                             </input>
-                            <button className="green" type="submit" value="Submit">Add</button>
-                            <button className="red" onClick={this.RemoveUsers} >Remove</button>
+                            <button
+                                className="green"
+                                type="submit"
+                                value="Submit">Add
+                            </button>
+                            <button
+                                className="red"
+                                onClick={this.RemoveUsers}>Remove
+                            </button>
                         </form>
                     </div>
                 </WrapperComponent>
@@ -73,3 +94,4 @@ class DashboardComponent extends Component {
 }
 
 export default DashboardComponent;
+

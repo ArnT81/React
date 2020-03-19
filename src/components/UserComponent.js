@@ -1,14 +1,18 @@
 import React from 'react';
+import {
+    /* BrowserRouter as Router,
+    Switch,
+    Route, */
+    Link
+} from "react-router-dom"
 
-/** 
-* Recieves color and single user. 
-* Displays the user with recieved current color. 
-*/
 
 function UserComponent(props) {
+    console.log(props.user)
+
     return (
-        <li className="userListItem" style={{ color: props.color }}>
-            {props.children}
+        <li>
+            <Link className="userListItem" style={{ color: props.color }} to="/user">{props.user} </Link>
         </li>
     );
 }
