@@ -78,6 +78,8 @@ button {
   background: linear-gradient(to bottom,  #ffffff, .5%, #239e3d);
 }
 
+
+
 ul {
   padding: 0px;
 }
@@ -104,4 +106,21 @@ li {
   left: 48%;
   color: red;
   font-size: xx-large;
+}
+
+
+.singleUserModal {
+text-align: left;
+}
+.singleUserModal>p {
+  margin: 7px;
+}
+.singleUserModal>h3 {
+  margin: 7px;
+}
+.singleUserModal>div>p {
+  margin: 7px;
+}
+.grey{
+  color: grey;
 }

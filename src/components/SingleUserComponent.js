@@ -5,9 +5,11 @@ class SingleUserComponent extends Component {
 
     constructor(props) {
         super(props)
-        this.state = { users: '' }
+        this.state = { users: '', showContent: false }
         this.url = 'users/'
-        this.index = 1
+        this.index = 5
+
+        console.log(props)
 
         fetch('https://jsonplaceholder.typicode.com/' + this.url + '/')
             .then((response) => {
@@ -29,6 +31,10 @@ class SingleUserComponent extends Component {
             });
     }
 
+    toggleContent = () => {
+        this.setState({ showContent: !this.state.showContent });
+    }
+
     render() {
         // console.log(username)
         if (!this.state.users) {
@@ -39,14 +45,15 @@ class SingleUserComponent extends Component {
         return (
             <WrapperComponent>
                 <div className="singleUserModal">
-                    <p>{this.state.users[0]}</p>
-                    <p>{this.state.users[1]}</p>
+                    <h3>{this.state.users[0]}</h3>
+                    <p className="grey">{this.state.users[1]}</p>
                     <p>{this.state.users[2]}</p>
-                    <p>{this.state.users[3]}</p>
-                    <button>Show Address</button>
-                    {this.state.users.forEach(element => {
-                        return <div>{element}</div>
-                    })}
+                    <button onClick={this.toggleContent}>Show Address</button>
+                    {this.state.showContent ? <div>
+                        <p>{this.state.users[3]}</p>
+                        <p>{this.state.users[4]}</p>
+                        <p>{this.state.users[5]}</p>
+                    </div> : null}
                 </div>
             </WrapperComponent>
         )
