@@ -7,33 +7,48 @@ class SingleUserComponent extends Component {
         super(props)
         this.state = { users: '' }
         this.url = 'users/'
-        this.i = 1
+        this.index = 1
 
-        fetch('https://jsonplaceholder.typicode.com/' + this.url + '/' + this.i)
+        fetch('https://jsonplaceholder.typicode.com/' + this.url + '/')
             .then((response) => {
                 return response.json();
             })
             .then((data) => {
-                this.setState({ users: data })
+                let keys = ['username', 'name', 'email', 'address'],
+                    [username, name, email, address] = data.reduce((a, b) => {
+                        return keys.map((x, i) => { a[i].push(b[x]) }), a;
+                    }, [[], [], [], []]);
+
+                let userInfo = [username[this.index],
+                name[this.index],
+                email[this.index],
+                address[this.index].city,
+                address[this.index].street,
+                address[this.index].suite]
+                this.setState({ users: userInfo })
             });
     }
 
     render() {
+        // console.log(username)
         if (!this.state.users) {
             return (
-                <div style={{color: 'red', textAlign: "center"}}>Users not loaded yet</div>
+                <div className="loading">Users not loaded yet</div>
             );
         }
         return (
-            <div className="singleUserModal">
-                <WrapperComponent>
-                    {/* <img src="" /> */}
-                    {this.state.users.username}<br />
-                    {this.state.users.name}<br />
-                    {this.state.users.email}
+            <WrapperComponent>
+                <div className="singleUserModal">
+                    <p>{this.state.users[0]}</p>
+                    <p>{this.state.users[1]}</p>
+                    <p>{this.state.users[2]}</p>
+                    <p>{this.state.users[3]}</p>
                     <button>Show Address</button>
-                </WrapperComponent>
-            </div>
+                    {this.state.users.forEach(element => {
+                        return <div>{element}</div>
+                    })}
+                </div>
+            </WrapperComponent>
         )
     }
 }

@@ -97,3 +97,11 @@ ul {
 li {
   list-style: none;
 }
+
+.loading {
+  position: absolute;
+  top: 200px;
+  left: 48%;
+  color: red;
+  font-size: xx-large;
+}

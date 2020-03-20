@@ -1,21 +1,25 @@
 import React from 'react';
-import {
-    /* BrowserRouter as Router,
-    Switch,
-    Route, */
-    Link
-} from "react-router-dom"
+import { Link } from "react-router-dom"
 
 
-function UserComponent(props) {
-    console.log(props.user)
+export default function UserComponent(props) {
+    console.log(props)
+
+    /*  fetch('https://jsonplaceholder.typicode.com/users/')
+         .then((response) => {
+             return response.json();
+         })
+         .then((data) => {
+             setState({ users: data })
+             console.log(data)
+         }); */
 
     return (
         <li>
-            <Link className="userListItem" style={{ color: props.color }} to="/user">{props.user} </Link>
+            <Link className="userListItem" style={{ color: props.color }} to="/user">{props.user}</Link>
         </li>
     );
 }
 
-export default UserComponent;
+// export default UserComponent;
 
