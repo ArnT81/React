@@ -1,6 +1,6 @@
 import React from 'react';
 import DashboardComponent from './DashboardComponent'
-import SingleUserComponent from './SingleUserComponent'
+import UserComponent from './UserComponent'
 import LoginComponent from './LoginComponent'
 import {
     BrowserRouter as Router,
@@ -33,7 +33,7 @@ function NavComponent() {
             <Route path="/" exact component={LoginComponent} />
                 <Route path="/login" component={LoginComponent} />
                 <Route path="/dashboard" component={DashboardComponent} />
-                <Route path="/user" component={SingleUserComponent} />
+                <Route path="/user" component={UserComponent} />
             </Switch>
         </Router>
     )

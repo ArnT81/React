@@ -40,11 +40,12 @@ class SingleUserComponent extends Component {
         if (!this.state.users) {
             return (
                 <div className="loading">Users not loaded yet</div>
-            );
+            )
         }
         return (
             <WrapperComponent>
                 <div className="singleUserModal">
+                    <img src="https://placekitten.com/250/300" alt="picture" />
                     <h3>{this.state.users[0]}</h3>
                     <p className="grey">{this.state.users[1]}</p>
                     <p>{this.state.users[2]}</p>
