@@ -1,30 +1,54 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from "react-router-dom"
+import React, { useEffect, useState } from 'react';
+import WrapperComponent from './WrapperComponent';
 
 
 function UserComponent(props) {
-    console.log(props)
-    const [user, newState] = useState(props.user)
+
+    // console.log('props in UserComponent ', props.userId)
+    console.log('props in UserComponent ', props);
+    const [user, setUser] = useState({});
+    const [value, setValue] = useState(true);
+    const [toggle, setToggle] = useState(false);
+    const clickedUser = 6;
 
     useEffect(() => {
-        console.log('user Effect runs');
-        
-      });
+        // fetch('https://api.softhouse.rocks/users/')
+        fetch('https://jsonplaceholder.typicode.com/users/' + clickedUser)
+            .then((response) => {
+                return response.json();
+            })
+            .then((data) => {
+                setUser(data)
+            });
+    });
 
-    /*  fetch('https://jsonplaceholder.typicode.com/users/')
-         .then((response) => {
-             return response.json();
-         })
-         .then((data) => {
-             setState({ users: data })
-             console.log(data)
-         }); */
+    const toggleAdress = () => {
+        setToggle(!toggle);
+    }
 
     return (
-        <li>
-            <Link onClick={() => newState(user)} className="userListItem" style={{ color: props.color }} to="/user">{props.user}</Link>
-        </li>
+        <WrapperComponent>
+            {!value ?
+                <p>No user selected!</p>
+                :
+                <div className="card">
+                    <img src="https://placekitten.com/250/300" alt="picture" />
+                    <h3>{user.username}</h3>
+                    <p>{user.name}</p>
+                    <p>{user.email}</p>
+                    
+                    {toggle ?
+                        <div>
+                            <p>{user.address.city}</p>
+                            <p>{user.address.street}</p>
+                            <p>{user.address.suite}</p>
+                        </div> : null}
+                        <button onClick={toggleAdress}>Show adress</button>
+                </div>
+            }
+        </WrapperComponent>
     );
+
 }
 
 export default UserComponent;

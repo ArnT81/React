@@ -5,8 +5,7 @@ import NavComponent from './components/NavComponent'
 function App() {
   return (
     <div className="App">
-      <NavComponent/>
-      {/* <DashboardComponent/> */}
+      <NavComponent />
     </div>
   );
 }

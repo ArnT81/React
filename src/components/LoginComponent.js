@@ -6,7 +6,6 @@ import { Redirect } from 'react-router-dom'
 class LoginComponent extends Component {
     constructor(props) {
         super(props);
-        console.log(props)
         this.state = { value: '', showContent: true, redirect: false };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -18,7 +17,6 @@ class LoginComponent extends Component {
 
     handleChange(e) {
         this.setState({ value: e.target.value });
-        console.log(this.state.redirect)
     }
 
     handleSubmit = (e) => {
@@ -52,7 +50,10 @@ class LoginComponent extends Component {
                         </button>
                     </form>
                 </div> : null}
-                <button className="button" onClick={this.toggleContent}>Show content</button>
+                <button
+                    className="button"
+                    onClick={this.toggleContent}>Show content
+                </button>
             </WrapperComponent>
         )
     }

@@ -30,10 +30,10 @@ function NavComponent() {
             </div>
 
             <Switch>
-            <Route path="/" exact component={LoginComponent} />
-                <Route path="/login" component={LoginComponent} />
-                <Route path="/dashboard" component={DashboardComponent} />
-                <Route path="/user" component={UserComponent} />
+                <Route path="/" exact render={props => <LoginComponent {...props} />} />
+                <Route path="/login" render={props => <LoginComponent {...props} />} />
+                <Route path="/dashboard" render={props => <DashboardComponent {...props} />} />
+                <Route path="/user" render={props => <UserComponent {...props} />} />
             </Switch>
         </Router>
     )

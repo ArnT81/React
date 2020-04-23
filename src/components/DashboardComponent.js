@@ -1,9 +1,7 @@
 import React, { Component } from 'react'
 import WrapperComponent from './WrapperComponent';
 import UserComponent from './UserComponent';
-
-
-// useState   !!!!!!!!
+import useParams, { Link } from 'react-router-dom';
 
 /** 
 *   Logic to update the virtual DOM when changes in the inputfield occurs,
@@ -15,15 +13,25 @@ import UserComponent from './UserComponent';
 
 class DashboardComponent extends Component {
 
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         this.state = {
-            users: ['Anders Söderberg', 'Anna Söderberg', 'Alice Söderberg', 'Leonora Söderberg'],
+            users: [],
             color: 'blue',
-            value: ''}
+            value: ''
+        }
+
         this.handleChange = this.handleChange.bind(this);
         this.AddUsers = this.AddUsers.bind(this);
         this.RemoveUsers = this.RemoveUsers.bind(this);
+
+        fetch('https://jsonplaceholder.typicode.com/users')
+            .then((response) => {
+                return response.json();
+            })
+            .then((data) => {
+                this.setState({ users: data })
+            });
     }
 
     handleChange(e) {
@@ -32,7 +40,7 @@ class DashboardComponent extends Component {
 
     AddUsers(e) {
         const newUser = [...this.state.users, this.state.value];
-        this.setState({ users: newUser, value: ""});
+        this.setState({ users: newUser, value: "" });
         e.preventDefault();
     }
 
@@ -47,21 +55,30 @@ class DashboardComponent extends Component {
         this.setState({ color: newColor });
     }
 
+    targetedUser = (e) => {
+        this.props.history.push('/user')
+       /*  if (e.target.innerHTML === this.user.name) {
+        } */
+    }
+
     render() {
         return (
-            <React.Fragment>
+            <React.Fragment >
                 <WrapperComponent>
-                    <ul>
-                        {this.state.users.map((user, index) => {
-                            return (
-                                <UserComponent
+                    {this.state.users.map((user, i) => {
+                        return (
+                            <ul>
+                                <li
+                                    key={i}
                                     className="userListItem"
-                                    user={user}
-                                    color={this.state.color}
-                                    key={index} />
-                            );
-                        })}
-                    </ul>
+                                    onClick={this.targetedUser}
+                                    style={{ color: this.state.color }}
+                                >
+                                    {user.name}
+                                </li>
+                            </ul>
+                        );
+                    })}
                     <button
                         onClick={this.toggleColor}>Toggle colors
                     </button>
@@ -88,7 +105,7 @@ class DashboardComponent extends Component {
                         </form>
                     </div>
                 </WrapperComponent>
-            </React.Fragment>
+            </React.Fragment >
         )
     }
 }
