@@ -14,6 +14,9 @@ code {
 }
 
 .App {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
   text-align: center;
 }
 
@@ -27,7 +30,7 @@ padding: 40px;
 
 .wrapper {
   position: relative;
-  left: 1%;
+  left: 45%;
   float: left;
   margin: 40px;
   width: 250px;
@@ -57,6 +60,16 @@ input:focus {
   box-shadow: 0px 0px 0px 3px #BFDEFF;
 }
 
+button {
+  width: 100%;
+  margin-top: 20px;
+  height: 38px;
+  border-radius: 4px;
+  border: none;
+  background: linear-gradient(to bottom, #ffffff, .5%, #20a5ac);
+  color: white;
+}
+
 .red {
   background: linear-gradient(to bottom,  #ffffff, .5%, #d62e3b); 
 }
@@ -69,17 +82,58 @@ ul {
   padding: 0px;
 }
 
-li {
-list-style: none;
-}
-
 .userListItem {
+  position: relative;
   display: flex;
-  width: 100%;
+  width: 250px;
   height: 35px;
   margin-top: 10px;
   border-radius: 4px;
   box-shadow: 2px 2px 4px black;
   align-items: center;
   justify-content: center;
+}
+
+li {
+  list-style: none;
+}
+
+.loading {
+  position: absolute;
+  top: 200px;
+  left: 48%;
+  color: red;
+  font-size: xx-large;
+}
+
+.singleUserModal {
+text-align: left;
+}
+.singleUserModal>p {
+  margin: 7px;
+}
+.singleUserModal>h3 {
+  margin: 7px;
+}
+.singleUserModal>div>p {
+  margin: 7px;
+}
+.grey{
+  color: grey;
+}
+
+.card {
+  text-align: left;
+}
+
+.card>p {
+  margin: 2px;
+}
+
+.card>h3 {
+  margin: 2px;
+}
+
+.grey {
+  color: grey;
 }

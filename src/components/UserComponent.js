@@ -1,16 +1,54 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import WrapperComponent from './WrapperComponent';
 
-/** 
-* Recieves color and single user. 
-* Displays the user with recieved current color. 
-*/
 
 function UserComponent(props) {
+
+    // console.log('props in UserComponent ', props.userId)
+    console.log('props in UserComponent ', props);
+    const [user, setUser] = useState({});
+    const [value, setValue] = useState(true);
+    const [toggle, setToggle] = useState(false);
+    const clickedUser = 6;
+
+    useEffect(() => {
+        // fetch('https://api.softhouse.rocks/users/')
+        fetch('https://jsonplaceholder.typicode.com/users/' + clickedUser)
+            .then((response) => {
+                return response.json();
+            })
+            .then((data) => {
+                setUser(data)
+            });
+    });
+
+    const toggleAdress = () => {
+        setToggle(!toggle);
+    }
+
     return (
-        <li className="userListItem" style={{ color: props.color }}>
-            {props.children}
-        </li>
+        <WrapperComponent>
+            {!value ?
+                <p>No user selected!</p>
+                :
+                <div className="card">
+                    <img src="https://placekitten.com/250/300" alt="picture" />
+                    <h3>{user.username}</h3>
+                    <p className="grey">{user.name}</p>
+                    <p>{user.email}</p>
+                    <br/>
+                    {toggle ?
+                        <div className="card">
+                            <p>{user.address.city}</p>
+                            <p>{user.address.street}</p>
+                            <p>{user.address.suite}</p>
+                        </div> : null}
+                        <button onClick={toggleAdress}>Show adress</button>
+                </div>
+            }
+        </WrapperComponent>
     );
+
 }
 
 export default UserComponent;
