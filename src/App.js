@@ -1,11 +1,11 @@
 import React from 'react';
-// import DashboardComponent from './components/DashboardComponent';
-import NavComponent from './components/NavComponent'
+import './App.css';
+import DashboardComponent from './components/DashboardComponent';
 
 function App() {
   return (
     <div className="App">
-      <NavComponent />
+      <DashboardComponent/>
     </div>
   );
 }

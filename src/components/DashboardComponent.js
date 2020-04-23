@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import WrapperComponent from './WrapperComponent';
 import UserComponent from './UserComponent';
-import useParams, { Link } from 'react-router-dom';
 
 /** 
 *   Logic to update the virtual DOM when changes in the inputfield occurs,
@@ -13,41 +12,29 @@ import useParams, { Link } from 'react-router-dom';
 
 class DashboardComponent extends Component {
 
-    constructor(props) {
-        super(props)
-        this.state = {
-            users: [],
-            color: 'blue',
-            value: ''
-        }
-
+    constructor() {
+        super()
+        this.state = { users: ['Anders Söderberg', 'Anna Söderberg', 'Alice Söderberg', 'Leonora Söderberg'], color: 'blue', value: '' }
         this.handleChange = this.handleChange.bind(this);
         this.AddUsers = this.AddUsers.bind(this);
         this.RemoveUsers = this.RemoveUsers.bind(this);
-
-        fetch('https://jsonplaceholder.typicode.com/users')
-            .then((response) => {
-                return response.json();
-            })
-            .then((data) => {
-                this.setState({ users: data })
-            });
     }
 
-    handleChange(e) {
-        this.setState({ value: e.target.value });
+    handleChange(event) {
+        this.setState({ value: event.target.value });
     }
 
-    AddUsers(e) {
+    AddUsers(event) {
         const newUser = [...this.state.users, this.state.value];
-        this.setState({ users: newUser, value: "" });
-        e.preventDefault();
+        this.setState({ users: newUser });
+        this.setState({ value: "" });
+        event.preventDefault();
     }
 
-    RemoveUsers(e) {
+    RemoveUsers(event) {
         let removeUser = this.state.users.slice(1)
         this.setState({ users: removeUser });
-        e.preventDefault();
+        event.preventDefault();
     }
 
     toggleColor = () => {
@@ -55,60 +42,34 @@ class DashboardComponent extends Component {
         this.setState({ color: newColor });
     }
 
-    targetedUser = (e) => {
-        this.props.history.push('/user')
-       /*  if (e.target.innerHTML === this.user.name) {
-        } */
-    }
-
     render() {
         return (
-            <React.Fragment >
+            <React.Fragment>
                 <WrapperComponent>
-                    {this.state.users.map((user, i) => {
-                        return (
-                            <ul>
-                                <li
-                                    key={i}
-                                    className="userListItem"
-                                    onClick={this.targetedUser}
-                                    style={{ color: this.state.color }}
-                                >
-                                    {user.name}
-                                </li>
-                            </ul>
-                        );
-                    })}
-                    <button
-                        onClick={this.toggleColor}>Toggle colors
-                    </button>
+                    <ul>
+                        {this.state.users.map((user, index) => {
+                            return (
+                                <UserComponent className="userListItem" color={this.state.color} key={index}>
+                                    {user}
+                                </UserComponent>
+                            );
+                        })}
+                    </ul>
+                    <button onClick={this.toggleColor}>Toggle colors</button>
                 </WrapperComponent>
                 <WrapperComponent>
                     <div>
                         <form onSubmit={this.AddUsers}>
-                            <input
-                                type="text"
-                                name="users"
-                                placeholder="new user.."
-                                value={this.state.value}
-                                onChange={e => this.handleChange(e)}>
+                            <input type="text" name="users" placeholder="new user.." value={this.state.value} onChange={event => this.handleChange(event)}>
                             </input>
-                            <button
-                                className="green"
-                                type="submit"
-                                value="Submit">Add
-                            </button>
-                            <button
-                                className="red"
-                                onClick={this.RemoveUsers}>Remove
-                            </button>
+                            <button className="green" type="submit" value="Submit">Add</button>
+                            <button className="red" onClick={this.RemoveUsers} >Remove</button>
                         </form>
                     </div>
                 </WrapperComponent>
-            </React.Fragment >
+            </React.Fragment>
         )
     }
 }
 
 export default DashboardComponent;
-
