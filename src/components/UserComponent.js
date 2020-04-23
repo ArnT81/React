@@ -34,11 +34,11 @@ function UserComponent(props) {
                 <div className="card">
                     <img src="https://placekitten.com/250/300" alt="picture" />
                     <h3>{user.username}</h3>
-                    <p>{user.name}</p>
+                    <p className="grey">{user.name}</p>
                     <p>{user.email}</p>
-                    
+                    <br/>
                     {toggle ?
-                        <div>
+                        <div className="card">
                             <p>{user.address.city}</p>
                             <p>{user.address.street}</p>
                             <p>{user.address.suite}</p>

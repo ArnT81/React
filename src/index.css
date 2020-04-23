@@ -133,3 +133,7 @@ text-align: left;
 .card>h3 {
   margin: 2px;
 }
+
+.grey {
+  color: grey;
+}
