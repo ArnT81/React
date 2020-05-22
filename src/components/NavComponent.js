@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import DashboardComponent from './DashboardComponent'
-import UserComponent from './UserComponent'
+import UserComponent from './UserScreen'
 import LoginComponent from './LoginComponent'
+import UserScreen from './UserScreen'
 import { StoreContext } from './StoreContext'
 import {
     BrowserRouter as Router,
@@ -45,7 +46,8 @@ function NavComponent() {
                     <Route path="/" exact component={LoginComponent} />
                     <Route path="/login" component={LoginComponent} />
                     <Route path="/dashboard" component={DashboardComponent} />
-                    <Route path="/user" component={UserComponent} />
+                    <Route path="/user/:id" component={UserComponent} />
+                    <Route path="/user/:id" component={UserScreen} />
                 </Switch>
             </Router>
         </StoreContext.Provider>

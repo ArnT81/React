@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import WrapperComponent from './WrapperComponent';
+import { StoreContext } from './StoreContext'
 import UserComponent from './UserComponent';
-import useParams, { Link } from 'react-router-dom';
 
 /** 
 *   Logic to update the virtual DOM when changes in the inputfield occurs,
@@ -12,18 +12,21 @@ import useParams, { Link } from 'react-router-dom';
 */
 
 class DashboardComponent extends Component {
+    static contextType = StoreContext;
 
     constructor(props) {
+
         super(props)
         this.state = {
             users: [],
             color: 'blue',
             value: ''
         }
-
         this.handleChange = this.handleChange.bind(this);
         this.AddUsers = this.AddUsers.bind(this);
         this.RemoveUsers = this.RemoveUsers.bind(this);
+
+        // console.log(props)
 
         fetch('https://jsonplaceholder.typicode.com/users')
             .then((response) => {
@@ -55,28 +58,21 @@ class DashboardComponent extends Component {
         this.setState({ color: newColor });
     }
 
-    targetedUser = (e) => {
-        this.props.history.push('/user')
-       /*  if (e.target.innerHTML === this.user.name) {
-        } */
-    }
-
     render() {
         return (
             <React.Fragment >
                 <WrapperComponent>
-                    {this.state.users.map((user, i) => {
+                    {this.state.users.map((user, index) => {
                         return (
-                            <ul>
-                                <li
-                                    key={i}
-                                    className="userListItem"
-                                    onClick={this.targetedUser}
+                            <div
+                                // userId={userId}
+                                key={index}>
+                                <UserComponent
                                     style={{ color: this.state.color }}
                                 >
                                     {user.name}
-                                </li>
-                            </ul>
+                                </UserComponent>
+                            </div>
                         );
                     })}
                     <button

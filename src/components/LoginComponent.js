@@ -28,7 +28,7 @@ class LoginComponent extends Component {
 
     renderRedirect = () => {
         if (this.state.redirect) {
-            return <Redirect to='/dashboard' />
+            return <Redirect push to='/dashboard' />
         }
     }
 

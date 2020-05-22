@@ -1,58 +1,36 @@
-import React, { useEffect, useState, useContext } from 'react';
-import WrapperComponent from './WrapperComponent';
-import { StoreContext } from './StoreContext'
+import React, { useState, useEffect } from 'react'
 
-
-function UserComponent(props) {
-    const store = useContext(StoreContext)
-
-    console.log('THIS IS THE STORE', store)
-    // console.log('props in UserComponent ', props.userId)
-    console.log('props in UserComponent ', props);
-    const [user, setUser] = useState({});
-    const [value, setValue] = useState(true);
-    const [toggle, setToggle] = useState(false);
-    const clickedUser = 6;
+const Usercomponent = (props) => {
+    console.log(props)
+    const [getUser, setGetUser] = useState(false)
 
     useEffect(() => {
-        // fetch('https://api.softhouse.rocks/users/')
-        fetch('https://jsonplaceholder.typicode.com/users/' + clickedUser)
-            .then((response) => {
-                return response.json();
-            })
-            .then((data) => {
-                setUser(data)
-            });
+        // console.log(props.match.params)
+
+        if (!getUser) {
+            // fetch('https://api.softhouse.rocks/users/')
+            fetch('https://jsonplaceholder.typicode.com/users/1' /* props.match.params.id */)
+                .then((response) => {
+                    return response.json();
+                })
+                .then((data) => {
+                    setGetUser(data)
+                });
+            setGetUser(true)
+        }
     });
 
-    const toggleAdress = () => {
-        setToggle(!toggle);
+    const toUserScreen = (props) => {
+        this.props.history.push('/user/:id')
     }
 
     return (
-        <WrapperComponent>
-            {!value ?
-                <p>No user selected!</p>
-                :
-                <div className="card">
-                    <img src="https://placekitten.com/250/300" alt="picture" />
-                    <h3>{user.username}</h3>
-                    <p className="grey">{user.name}</p>
-                    <p>{user.email}</p>
-                    <br />
-                    {toggle ?
-                        <div className="card">
-                            <p>{user.address.city}</p>
-                            <p>{user.address.street}</p>
-                            <p>{user.address.suite}</p>
-                        </div> : null}
-                    <button onClick={toggleAdress}>Show adress</button>
-                </div>
-            }
-        </WrapperComponent>
-    );
+        <div className="userListItem" onClick={()=>{this.props.history.push('/user/:id')}} onClick={() => { toUserScreen(/* user.id */) }}>
+            {props.children}
+        </div>
+    )
+
 
 }
 
-export default UserComponent;
-
+export default Usercomponent
