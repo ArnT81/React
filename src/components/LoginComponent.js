@@ -3,6 +3,11 @@ import { Component } from "react";
 import WrapperComponent from './WrapperComponent'
 import { Redirect } from 'react-router-dom'
 
+/** 
+* Logic to toggle content and redirect if someone enters more than 10 characters in input-field 
+* Displays one input-field and two buttons
+*/
+
 class LoginComponent extends Component {
     constructor(props) {
         super(props);

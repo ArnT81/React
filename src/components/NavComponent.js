@@ -11,6 +11,10 @@ import {
 } from "react-router-dom"
 import styles from '../styles/navBar.module.css'
 
+/** 
+* Logic for the apps Routing
+*/
+
 function NavComponent() {
 
     return (

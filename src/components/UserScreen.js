@@ -16,8 +16,7 @@ function UserScreen(props) {
 
     useEffect(() => {
         if (!user) {
-            // fetch('https://api.softhouse.rocks/users/')
-            fetch('https://jsonplaceholder.typicode.com/users/' + id)
+            fetch('https://api.softhouse.rocks/users/' + id)
                 .then((response) => {
                     return response.json();
                 })

@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 
 /**
- * Logic and a button to toggle visability of the content recieved from its children.
- * Recieves css for button from wrapper.model.css.
- */
+* Logic and a button to toggle visability of the content recieved from its children.
+* Recieves css for button from wrapper.model.css.
+*/
 
 class WrapperComponent extends Component {
 

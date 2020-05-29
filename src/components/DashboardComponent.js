@@ -22,7 +22,7 @@ class DashboardComponent extends Component {
         this.AddUsers = this.AddUsers.bind(this);
         this.RemoveUsers = this.RemoveUsers.bind(this);
 
-        fetch('https://jsonplaceholder.typicode.com/users')
+        fetch('https://api.softhouse.rocks/users/')
             .then((response) => {
                 return response.json();
             })
