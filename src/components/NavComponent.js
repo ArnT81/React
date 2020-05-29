@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import DashboardComponent from './DashboardComponent'
-import UserComponent from './UserScreen'
+import UserComponent from './UserComponent'
 import LoginComponent from './LoginComponent'
 import UserScreen from './UserScreen'
-import { StoreContext } from './StoreContext'
 import {
     BrowserRouter as Router,
     Switch,
@@ -13,44 +12,32 @@ import {
 import styles from '../styles/navBar.module.css'
 
 function NavComponent() {
-    const [admin, setAdmin] = useState(null)
-    const [id, setId] = useState(null);
-    const [user, setUser] = useState({})
-
-    const store = {
-        id: { get: id, set: setId },
-        admin: { get: admin, set: setAdmin },
-        user: { get: user, set: setUser }
-    }
 
     return (
-        <StoreContext.Provider value={store}>
-            <Router>
-                <div className={styles.NavBar}>
-                    <nav>
-                        <ul>
-                            <li className={styles.NavLi}>
-                                <Link to="/login">Login</Link>
-                            </li>
-                            <li className={styles.NavLi}>
-                                <Link to="dashboard">Dashboard</Link>
-                            </li>
-                            <li className={styles.NavLi}>
-                                <Link to="user">User</Link>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
-
-                <Switch>
-                    <Route path="/" exact component={LoginComponent} />
-                    <Route path="/login" component={LoginComponent} />
-                    <Route path="/dashboard" component={DashboardComponent} />
-                    <Route path="/user/:id" component={UserComponent} />
-                    <Route path="/user/:id" component={UserScreen} />
-                </Switch>
-            </Router>
-        </StoreContext.Provider>
+        <Router>
+            <div className={styles.NavBar}>
+                <nav>
+                    <ul>
+                        <li className={styles.NavLi}>
+                            <Link to="/login">Login</Link>
+                        </li>
+                        <li className={styles.NavLi}>
+                            <Link to="dashboard">Dashboard</Link>
+                        </li>
+                        <li className={styles.NavLi}>
+                            <Link to="users">User</Link>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            <Switch>
+                <Route path="/" exact render={props => <LoginComponent {...props} />} />
+                <Route path="/login" exact render={props => <LoginComponent {...props} />} />
+                <Route path="/dashboard" exact render={props => <DashboardComponent {...props} />} />
+                <Route path="/users" exact render={props => <UserComponent {...props} />} />
+                <Route path="/users:id" exact render={props => <UserScreen {...props} />} />
+            </Switch>
+        </Router>
     )
 }
 

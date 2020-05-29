@@ -92,6 +92,7 @@ ul {
   box-shadow: 2px 2px 4px black;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
 }
 
 li {

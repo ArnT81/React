@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
 import WrapperComponent from './WrapperComponent';
-import { StoreContext } from './StoreContext'
-import UserComponent from './UserComponent';
 
 /** 
 *   Logic to update the virtual DOM when changes in the inputfield occurs,
@@ -12,10 +10,8 @@ import UserComponent from './UserComponent';
 */
 
 class DashboardComponent extends Component {
-    static contextType = StoreContext;
 
     constructor(props) {
-
         super(props)
         this.state = {
             users: [],
@@ -25,8 +21,6 @@ class DashboardComponent extends Component {
         this.handleChange = this.handleChange.bind(this);
         this.AddUsers = this.AddUsers.bind(this);
         this.RemoveUsers = this.RemoveUsers.bind(this);
-
-        // console.log(props)
 
         fetch('https://jsonplaceholder.typicode.com/users')
             .then((response) => {
@@ -58,20 +52,30 @@ class DashboardComponent extends Component {
         this.setState({ color: newColor });
     }
 
+    onClickeUser = (e) => {
+        let foundUser = this.state.users.find(found => {
+            if (found.name === e.target.innerHTML) {
+                this.props.history.push('/users' + found.id)
+                return found
+            }
+        })
+    }
+
     render() {
         return (
             <React.Fragment >
                 <WrapperComponent>
                     {this.state.users.map((user, index) => {
                         return (
-                            <div
-                                // userId={userId}
-                                key={index}>
-                                <UserComponent
+                            <div key={index}>
+                                <li className="userListItem"
+
+                                    onClick={this.onClickeUser}
                                     style={{ color: this.state.color }}
+                                    key={index}
                                 >
                                     {user.name}
-                                </UserComponent>
+                                </li>
                             </div>
                         );
                     })}
