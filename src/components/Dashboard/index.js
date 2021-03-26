@@ -54,13 +54,9 @@ class Dashboard extends Component {
     }
 
     onClickeUser = (e) => {
-        this.state.users.find(found => {
-            if (found.name === e.target.innerHTML) {
-                this.props.history.push('/users' + found.id)
-                return found
-            }
-        })
+        this.props.history.push('/users' + this.state.users.filter(i => i.name === e.target.innerHTML)[0].id)
     }
+
 
     render() {
         return (
@@ -100,8 +96,6 @@ class Dashboard extends Component {
                                 color="linear-gradient(to bottom,  #ffffff, .5%, #239e3d)">
                                 Add
                             </Button>
-
-
                             <Button
                                 function={this.RemoveUsers}
                                 color="linear-gradient(to bottom,  #ffffff, .5%, #d62e3b)"
