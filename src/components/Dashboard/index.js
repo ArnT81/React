@@ -70,7 +70,6 @@ class Dashboard extends Component {
                         return (
                             <div key={index}>
                                 <li className={styles.userListItem}
-
                                     onClick={this.onClickeUser}
                                     style={{ color: this.state.color }}
                                     key={index}
@@ -80,13 +79,15 @@ class Dashboard extends Component {
                             </div>
                         );
                     })}
-                    <button
-                        onClick={this.toggleColor}>Toggle colors
-                    </button>
+                    <Button
+                        function={this.toggleColor}
+                    >
+                        Toggle colors
+                    </Button>
                 </Wrapper>
                 <Wrapper>
                     <div>
-                        <form onSubmit={this.AddUsers}>
+                        <form>
                             <input
                                 type="text"
                                 name="users"
@@ -94,15 +95,19 @@ class Dashboard extends Component {
                                 value={this.state.value}
                                 onChange={e => this.handleChange(e)}>
                             </input>
-                            <button
-                                className={styles.green}
-                                type="submit"
-                                value="Submit">Add
-                            </button>
-                            <button
-                                className={styles.red}
-                                onClick={this.RemoveUsers}>Remove
-                            </button>
+                            <Button
+                                function={this.AddUsers}
+                                color="linear-gradient(to bottom,  #ffffff, .5%, #239e3d)">
+                                Add
+                            </Button>
+
+
+                            <Button
+                                function={this.RemoveUsers}
+                                color="linear-gradient(to bottom,  #ffffff, .5%, #d62e3b)"
+                            >
+                                Remove
+                            </Button>
                         </form>
                     </div>
                 </Wrapper>

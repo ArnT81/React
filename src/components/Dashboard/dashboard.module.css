@@ -11,11 +11,3 @@
     justify-content: center;
     cursor: pointer;
 }
-
-.red {
-    background: linear-gradient(to bottom,  #ffffff, .5%, #d62e3b); 
-}
-
-.green {
-    background: linear-gradient(to bottom,  #ffffff, .5%, #239e3d);
-}

@@ -1,7 +1,9 @@
 import React from 'react'
 import { Component } from "react";
-import Wrapper from '../Wrapper';
 import { Redirect } from 'react-router-dom';
+//COMPONENT
+import Wrapper from '../Wrapper';
+import Button from '../Button';
 
 /** 
 * Logic to toggle content and redirect if someone enters more than 10 characters in input-field 
@@ -51,15 +53,17 @@ class Login extends Component {
                                 value={this.state.value}
                                 onChange={e => this.handleChange(e)}>
                             </input>
-                            <button>Login
-                        </button>
+                            <Button>
+                                Login
+                            </Button>
                         </form>
                     </div>
                     : null}
-                <button
-                    className="button"
-                    onClick={this.toggleContent}>Show content
-                </button>
+                <Button
+                    function={this.toggleContent}
+                >
+                    Show content
+                </Button>
             </Wrapper>
         )
     }
