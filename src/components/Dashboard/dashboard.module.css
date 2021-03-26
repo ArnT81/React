@@ -1,0 +1,21 @@
+
+.userListItem {
+    position: relative;
+    display: flex;
+    width: 250px;
+    height: 35px;
+    margin-top: 10px;
+    border-radius: 4px;
+    box-shadow: 2px 2px 4px black;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.red {
+    background: linear-gradient(to bottom,  #ffffff, .5%, #d62e3b); 
+}
+
+.green {
+    background: linear-gradient(to bottom,  #ffffff, .5%, #239e3d);
+}

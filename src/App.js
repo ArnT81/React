@@ -1,11 +1,11 @@
 import React from 'react';
-// import DashboardComponent from './components/DashboardComponent';
-import NavComponent from './components/NavComponent'
+//COMPONENTS
+import Navbar from './components/Navbar'
 
 function App() {
   return (
     <div className="App">
-      <NavComponent />
+      <Navbar />
     </div>
   );
 }

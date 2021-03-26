@@ -1,6 +1,7 @@
-import React, { Component } from 'react'
-import WrapperComponent from './WrapperComponent';
-
+import React, { Component } from 'react';
+import Wrapper from '../Wrapper';
+import Button from '../Button';
+import styles from './dashboard.module.css';
 /** 
 *   Logic to update the virtual DOM when changes in the inputfield occurs,
 *   adds users, remove users, and toggle color of the users.
@@ -9,7 +10,7 @@ import WrapperComponent from './WrapperComponent';
 *   other wrapper.
 */
 
-class DashboardComponent extends Component {
+class Dashboard extends Component {
 
     constructor(props) {
         super(props)
@@ -22,7 +23,7 @@ class DashboardComponent extends Component {
         this.AddUsers = this.AddUsers.bind(this);
         this.RemoveUsers = this.RemoveUsers.bind(this);
 
-        fetch('https://api.softhouse.rocks/users/')
+        fetch('https://jsonplaceholder.typicode.com/users/')
             .then((response) => {
                 return response.json();
             })
@@ -53,7 +54,7 @@ class DashboardComponent extends Component {
     }
 
     onClickeUser = (e) => {
-        let foundUser = this.state.users.find(found => {
+        this.state.users.find(found => {
             if (found.name === e.target.innerHTML) {
                 this.props.history.push('/users' + found.id)
                 return found
@@ -64,11 +65,11 @@ class DashboardComponent extends Component {
     render() {
         return (
             <React.Fragment >
-                <WrapperComponent>
+                <Wrapper>
                     {this.state.users.map((user, index) => {
                         return (
                             <div key={index}>
-                                <li className="userListItem"
+                                <li className={styles.userListItem}
 
                                     onClick={this.onClickeUser}
                                     style={{ color: this.state.color }}
@@ -82,8 +83,8 @@ class DashboardComponent extends Component {
                     <button
                         onClick={this.toggleColor}>Toggle colors
                     </button>
-                </WrapperComponent>
-                <WrapperComponent>
+                </Wrapper>
+                <Wrapper>
                     <div>
                         <form onSubmit={this.AddUsers}>
                             <input
@@ -94,21 +95,21 @@ class DashboardComponent extends Component {
                                 onChange={e => this.handleChange(e)}>
                             </input>
                             <button
-                                className="green"
+                                className={styles.green}
                                 type="submit"
                                 value="Submit">Add
                             </button>
                             <button
-                                className="red"
+                                className={styles.red}
                                 onClick={this.RemoveUsers}>Remove
                             </button>
                         </form>
                     </div>
-                </WrapperComponent>
+                </Wrapper>
             </React.Fragment >
         )
     }
 }
 
-export default DashboardComponent;
+export default Dashboard;
 

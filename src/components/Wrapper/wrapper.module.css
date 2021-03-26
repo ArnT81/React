@@ -1,0 +1,17 @@
+.wrapper {
+    position: relative;
+    left: 45%;
+    float: left;
+    margin: 40px;
+    width: 250px;
+    padding: 20px;
+    border-radius: 4px;
+    box-shadow: 4px 4px 6px;
+}
+
+.wrapper>hr {
+    height: 1px;
+    background: linear-gradient(90deg, white, grey, white);
+    margin-top: 15px;
+    border: none;
+}

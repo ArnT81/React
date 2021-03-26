@@ -1,14 +1,14 @@
 import React from 'react'
 import { Component } from "react";
-import WrapperComponent from './WrapperComponent'
-import { Redirect } from 'react-router-dom'
+import Wrapper from '../Wrapper';
+import { Redirect } from 'react-router-dom';
 
 /** 
 * Logic to toggle content and redirect if someone enters more than 10 characters in input-field 
 * Displays one input-field and two buttons
 */
 
-class LoginComponent extends Component {
+class Login extends Component {
     constructor(props) {
         super(props);
         this.state = { value: '', showContent: true, redirect: false };
@@ -39,29 +39,30 @@ class LoginComponent extends Component {
 
     render() {
         return (
-            <WrapperComponent>
+            <Wrapper>
                 {this.renderRedirect()}
-                {this.state.showContent ? <div>
-                    <form
-                        onSubmit={this.handleSubmit}>
-                        <input
-                            type="text"
-                            name="admin"
-                            value={this.state.value}
-                            onChange={e => this.handleChange(e)}>
-                        </input>
-                        <button
-                            className="green">Login
+                {this.state.showContent ?
+                    <div>
+                        <form
+                            onSubmit={this.handleSubmit}>
+                            <input
+                                type="text"
+                                name="admin"
+                                value={this.state.value}
+                                onChange={e => this.handleChange(e)}>
+                            </input>
+                            <button>Login
                         </button>
-                    </form>
-                </div> : null}
+                        </form>
+                    </div>
+                    : null}
                 <button
                     className="button"
                     onClick={this.toggleContent}>Show content
                 </button>
-            </WrapperComponent>
+            </Wrapper>
         )
     }
 }
 
-export default LoginComponent
+export default Login;
