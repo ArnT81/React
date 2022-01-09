@@ -11,10 +11,11 @@ import PropTypes from 'prop-types';
 function UserScreen(props) {
     const [user, setUser] = useState()
     const [toggle, setToggle] = useState();
-    let id = props.match.params.id
+    let id = props.match.params.id.replace(':', '')
+
 
     useEffect(() => {
-        if (!user) {
+        if (!user && id <= 10) {
             fetch('https://jsonplaceholder.typicode.com/users/' + id)
                 .then((response) => {
                     return response.json();
@@ -30,28 +31,34 @@ function UserScreen(props) {
     }
 
     const Card = () => {
-        let { name, username, email } = user;
-        let { city, street, suite } = user.address;
-
         return (
             <div className="card">
                 <img src="https://placekitten.com/250/300" alt="cat" />
-                <h3>{username}</h3>
-                <p className="grey">{name}</p>
-                <p>{email}</p>
+                <h3>{user?.username || 'no username added'}</h3>
+                <p className="grey">{user?.name || props.location.state[0].name}</p>
+                <p>{user?.email || 'no email added'}</p>
                 <br />
                 {toggle &&
                     <div className="card">
-                        <p>{city}</p>
-                        <p>{street}</p>
-                        <p>{suite}</p>
+                        <p>{user?.address.city || 'no city added'}</p>
+                        <p>{user?.address.street || 'no street added'}</p>
+                        <p>{user?.address.suite || 'no suite added'}</p>
                     </div>}
                 <button onClick={toggleAdress}>Show adress</button>
             </div>
         )
     }
 
+    //  For created users
+    if (props.location.state) {
+        return (
+            <Wrapper>
+                <Card />
+            </Wrapper>
+        )
+    }
 
+    //  Regular users (from json placeholder)
     return (
         <Wrapper>
             {!user ?

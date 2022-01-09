@@ -36,10 +36,17 @@ class Dashboard extends Component {
         this.setState({ value: e.target.value });
     }
 
-    AddUsers(e) {
-        const newUser = [...this.state.users, this.state.value];
-        this.setState({ users: newUser, value: "" });
-        e.preventDefault();
+    AddUsers() {
+        const newUser = {
+            name: this.state.value,
+            id: this.state.users.length + 1
+        }
+
+        if (!this.state.value) return
+        else {
+            this.setState({ users: [...this.state.users, newUser] })
+            this.setState({ value: '' });
+        }
     }
 
     RemoveUsers(e) {
@@ -53,8 +60,13 @@ class Dashboard extends Component {
         this.setState({ color: newColor });
     }
 
-    onClickeUser = (e) => {
-        this.props.history.push('/users' + this.state.users.filter(i => i.name === e.target.innerHTML)[0].id)
+    onClickedUser = ({ target }) => {
+        if (this.state.users.length <= 10) {
+            this.props.history.push('/user:' + this.state.users.filter(user => user.name === target.innerHTML)[0].id)
+        } else {
+            //  For newly created users (sends all new as props instead since json placeholder do not recognize them )
+            this.props.history.push('user:' + this.state.users.filter(user => user.name === target.innerHTML)[0].id, this.state.users.filter(user => user.name === target.innerHTML))
+        }
     }
 
 
@@ -66,7 +78,7 @@ class Dashboard extends Component {
                         return (
                             <div key={index}>
                                 <li className={styles.userListItem}
-                                    onClick={this.onClickeUser}
+                                    onClick={this.onClickedUser}
                                     style={{ color: this.state.color }}
                                     key={index}
                                 >

@@ -39,7 +39,7 @@ function Navbar() {
                 <Route path="/login" exact render={props => <Login {...props} />} />
                 <Route path="/dashboard" exact render={props => <Dashboard {...props} />} />
                 <Route path="/users" exact render={props => <Users {...props} />} />
-                <Route path="/users:id" exact render={props => <UserScreen {...props} />} />
+                <Route path="/user:id" exact render={props => <UserScreen {...props} />} />
             </Switch>
         </Router>
     )
